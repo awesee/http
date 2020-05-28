@@ -37,9 +37,6 @@ func (r *Response) Result() ([]byte, error) {
 }
 
 func (r *Response) JsonUnmarshal(v interface{}) error {
-	if r.err != nil {
-		return r.err
-	}
 	data := r.Val()
 	if r.err != nil {
 		return r.err
