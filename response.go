@@ -9,6 +9,7 @@ import (
 type Response struct {
 	err  error
 	resp *http.Response
+	body []byte
 }
 
 func (r *Response) Err() error {
@@ -20,12 +21,11 @@ func (r *Response) Response() *http.Response {
 }
 
 func (r *Response) Val() []byte {
-	var body []byte
-	if r.err == nil {
-		body, r.err = ioutil.ReadAll(r.resp.Body)
+	if r.err == nil && r.body == nil {
+		r.body, r.err = ioutil.ReadAll(r.resp.Body)
 		defer r.resp.Body.Close()
 	}
-	return body
+	return r.body
 }
 
 func (r *Response) String() string {
