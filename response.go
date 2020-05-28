@@ -2,6 +2,7 @@ package http
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"io/ioutil"
 	"net/http"
 )
@@ -42,4 +43,12 @@ func (r *Response) JsonUnmarshal(v interface{}) error {
 		return r.err
 	}
 	return json.Unmarshal(data, v)
+}
+
+func (r *Response) XmlUnmarshal(v interface{}) error {
+	data := r.Val()
+	if r.err != nil {
+		return r.err
+	}
+	return xml.Unmarshal(data, v)
 }
