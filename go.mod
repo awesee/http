@@ -1,3 +1,3 @@
-module github.com/openset/go-http
+module github.com/openset/http
 
 go 1.13
